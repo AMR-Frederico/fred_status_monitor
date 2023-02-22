@@ -22,7 +22,11 @@ left_rpm = 0
 right_ticks = 0
 right_rpm = 0
 heading = 0
+goal = 0 
 
+def goal_callback(msg):
+    global goal 
+    goal = msg.data
 
 def leftRpmCallback(msg):
     global left_rpm
@@ -101,6 +105,7 @@ if __name__ == '__main__':
     #cmd_vel/safe
     rospy.Subscriber("cmd_vel/safe",Twist,cmd_vel_safe_callback)
     #emergency topics 
+    rospy.Subscriber("control/position/x",Float64,goal_callback)
 
     #emergency break 
     rospy.Subscriber("/safety/emergency/stop",Bool, emergency_break_callback)
@@ -123,5 +128,7 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
 
 
-        print(f"Pos:[x:{current_position_x},y:{current_position_y}]|Speed:[l:{current_speed_linear},a:{current_speed_angular}]|CMD_vel:[{cmd_vel}, safe:{cmd_vel_safe}]|Abort:{emergency}|Ultrassonic:[{distance_detected_left}|{distance_detected_middle}|{distance_detected_right}]|Ticks:[R:{right_ticks}|L:{left_ticks}]|RPM:[R{right_rpm}| L{left_rpm}]IMU:{heading}")
+        # print(f"Goal: {goal}|Pos:[x:{current_position_x},y:{current_position_y}]|Speed:[l:{current_speed_linear},a:{current_speed_angular}]|CMD_vel:[{cmd_vel}, safe:{cmd_vel_safe}]|Abort:{emergency}|Ultrassonic:[{distance_detected_left}|{distance_detected_middle}|{distance_detected_right}]|Ticks:[R:{right_ticks}|L:{left_ticks}]|RPM:[R{right_rpm}| L{left_rpm}]IMU:{heading}")
+        print(f"Goal: {goal}|Pos:[x:{current_position_x},y:{current_position_y}]|Speed:[l:{current_speed_linear},a:{current_speed_angular}]|CMD_vel:[{cmd_vel}, safe:{cmd_vel_safe}]|Abort:{emergency}|Ultrassonic:[{distance_detected_left}|{distance_detected_middle}|{distance_detected_right}]|Ticks:[R:{right_ticks}|L:{left_ticks}]|RPM:[R{right_rpm}| L{left_rpm}]IMU:{heading}")
+
         r.sleep()
