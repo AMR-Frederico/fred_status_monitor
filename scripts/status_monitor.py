@@ -107,10 +107,13 @@ if __name__ == '__main__':
     #odom 
     rospy.Subscriber("/odom",Odometry,odom_callback)
     #odom.twist 
-    #cmd_vel 
+   
+     #cmd_vel 
     rospy.Subscriber("cmd_vel",Twist,cmd_vel_callback)
-    #cmd_vel/safe
+   
+     #cmd_vel/safe
     rospy.Subscriber("cmd_vel/safe",Twist,cmd_vel_safe_callback)
+    
     #emergency topics 
     rospy.Subscriber("/control/position/setup/goal", Pose2D, goal_callback)
 
@@ -138,3 +141,6 @@ if __name__ == '__main__':
         print(f"Goal: [{goal_x}, {goal_y}]|Pos:[x:{current_position_x},y:{current_position_y}]|Speed:[l:{current_speed_linear},a:{current_speed_angular}]|CMD_vel:[{cmd_vel}, safe:{cmd_vel_safe}]|Abort:{emergency}|Ultrassonic:[{distance_detected_left}|{distance_detected_right}|{distance_detected_back}]|Ticks:[R:{right_ticks}|L:{left_ticks}]|RPM:[R{right_rpm}| L{left_rpm}]IMU:{heading}")
 
         r.sleep()
+
+
+
