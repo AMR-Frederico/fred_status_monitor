@@ -1,10 +1,11 @@
 <launch>
 
-    <node name="temp_publisher" 
+    <node name="monitor_ros_node" 
         pkg="fred_status_monitor" 
-        type="status_monitor.py"
+        type="temp_monitor.py"
         output="screen"
         >
+        
     </node>
           
 </launch>
